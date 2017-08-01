@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "easemob-websdk": "^1.4.11",
     "md5": "^2.2.1",   
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
