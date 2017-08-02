@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../actions'
-let Login = ({hidden}) =>
+let Login = ({dispatch,hidden }) =>
     (<div style={{
         display: hidden ? 'none' : ''
     }}><div className="banner">
@@ -11,7 +11,7 @@ let Login = ({hidden}) =>
             <form action="" method="get">
                 <input className="input-username" ref={userName => this.userName = userName} type="text" placeholder="请输入用户名" />
                 <input className="input-username input-password" ref={password => this.password = password} type="password" placeholder="请输入密码" />
-                <button className="btn-login" name="submit" type="button" onClick={() =>this.props.login(this.userName, this.password)} >登 录</button>
+                <button className="btn-login" name="submit" type="button" onClick={()=> dispatch(login({userName:this.userName.value, password:this.password.value}))} >登 录</button>
             </form>
         </div>
         <div className="footer">湖北城市建设职业技术学院门禁查询系统</div></div>)
@@ -25,13 +25,13 @@ const mapStateToProps = (state) => {
     return { hidden }
 }
 
-const mapDispatchToProps = {
+/*const mapDispatchToProps = {
     login: login
 }
-
+*/
 
 Login = connect(
-    mapStateToProps, mapDispatchToProps
+    mapStateToProps/*, mapDispatchToProps*/
 )(Login)
 
 

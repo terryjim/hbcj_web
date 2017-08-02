@@ -6,14 +6,9 @@
  *
  */
 var HBCJ = {}
-
+window.HBCJ = HBCJ
 HBCJ.config = {
-   
-    loginURL: 'http://localhost:8080/hbcj/login',
-   
-    
-   
-        
-    }
-    
+    loginUrl: 'http://localhost:8080/hbcj/login',
+}
+
 
