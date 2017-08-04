@@ -136,5 +136,13 @@ export default StyleSheet.create({
   'loading p': {
     'fontSize': [{ 'unit': 'px', 'value': 12 }],
     'color': '#a8a8a8'
+  },
+  'table th': {
+    'textAlign': 'center',
+    'height': [{ 'unit': 'px', 'value': 38 }]
+  },
+  'table td': {
+    'textAlign': 'center',
+    'height': [{ 'unit': 'px', 'value': 38 }]
   }
 });
