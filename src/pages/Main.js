@@ -1,160 +1,72 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { login } from '../actions'
+import { login, entranceStat } from '../actions'
 import { Table, FormGroup, FormControl, Form } from 'react-bootstrap';
 
 //阀值
-const fzArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+const fzArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 1000]
 //天数选择
-const dayArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-let Main = ({ hidden, depts, dispatch }) =>
+const dayArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100]
+let Main = ({ hidden, depts, stat, token, loading,dispatch }) =>
+
     (<div style={{
         display: hidden ? 'none' : ''
     }}><div className="banner">
             <img src="../images/banner.png" />
         </div>
-        {/*<div className="menu">
-    	<ul>
-        	<li><span id="trigger1">部门</span><img src="../images/down.png"/></li>
-        	<li><span id="trigger2">统计天数</span><img src="../images/down.png"/></li>
-        	<li><span id="trigger3">阀值</span><img src="../images/down.png"/></li>
-        	<li><a href="#"><img src="../images/icon-search.png" title="查询"/></a></li>
-        </ul>
-    </div>
-    <div className="ui-list">
-    	<table width="100%" cellspacing="0">
-          <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-           <tr>
-            <td align="center" valign="middle">姓名</td>
-            <td align="center" valign="middle">卡号</td>
-            <td align="center" valign="middle">部门</td>
-            <td align="center" valign="middle">次数</td>
-          </tr>
-          <tr>
-            <td align="center" valign="middle">刘德华</td>
-            <td align="center" valign="middle">882562349</td>
-            <td align="center" valign="middle">造价</td>
-            <td align="center" valign="middle">4</td>
-          </tr>
-          <tr>
-            <td align="center" valign="middle">慕容云海</td>
-            <td align="center" valign="middle">882562349</td>
-            <td align="center" valign="middle">物流</td>
-            <td align="center" valign="middle">4</td>
-          </tr>
-          <tr>
-            <td align="center" valign="middle">杨颖</td>
-            <td align="center" valign="middle">882562349</td>
-            <td align="center" valign="middle">造价</td>
-            <td align="center" valign="middle">2</td>
-          </tr>
-          <tr>
-            <td align="center" valign="middle">张韶涵</td>
-            <td align="center" valign="middle">3031754796</td>
-            <td align="center" valign="middle">8栋测试101</td>
-            <td align="center" valign="middle">11</td>
-          </tr>
-          <tr>
-            <td align="center" valign="middle">周星驰</td>
-            <td align="center" valign="middle">3031754796</td>
-            <td align="center" valign="middle">电气</td>
-            <td align="center" valign="middle">11</td>
-          </tr>
-        </table>
-    </div>*/}
+        {
+    loading?
+             (<div className="loading2">
+                <img src="../images/loading.gif" />
+                <p>查询中，请稍后...</p>
+            </div>)
+      :
         <div className="menu">
             <ul>
-                <li><FormControl componentClass="select" placeholder="select" ref={dept => this.dept = dept}>
+                <li><FormControl componentClass="select" placeholder="select" ref={selDept => this.selDept = selDept}>
                     <option value="0">部门</option>
                     {
-                        (depts!=null&&depts.length>0)?depts.map(x => (<option value={x.id}>{x.depName}</option>)):null
+                        (depts != null && depts.length > 0) ? depts.map(x => (<option value={x.id}>{x.depName}</option>)) : null
                     }
 
                 </FormControl></li>
-                <li><FormControl componentClass="select" placeholder="select">
+                <li><FormControl componentClass="select" placeholder="select" ref={selDay => this.selDay = selDay}>
                     <option value="0">天数</option>
                     {dayArray.map(x => (<option value={x}>{x}</option>))}
                 </FormControl></li>
-                <li><FormControl componentClass="select" placeholder="select">
+                <li><FormControl componentClass="select" placeholder="select" ref={selFz => this.selFz = selFz}>
                     <option value="0">阀值</option>
                     {fzArray.map(x => (<option value={x}>{x}</option>))}
                 </FormControl></li>
-                <li><a href="#" onClick={()=>alert(this.dept.selectedIndex)}><img src="../images/icon-search.png" title="查询" /></a></li>
+                <li>
+                    <a href="javascript:void(0)" onClick={() => {
+                        let selDept = ReactDOM.findDOMNode(this.selDept);
+                        let selDay = ReactDOM.findDOMNode(this.selDay);
+                        let selFz = ReactDOM.findDOMNode(this.selFz);
+                        let depId = selDept.options[selDept.selectedIndex].value
+                        let days = selDay.options[selDay.selectedIndex].value
+                        let threshold = selFz.options[selFz.selectedIndex].value
+                        if (depId == 0) {
+                            alert('请选择部门')
+                            return null
+                        }
+                        if (days == 0) {
+                            alert('请选择天数')
+                            return null
+                        }
+                        if (threshold == 0) {
+                            alert('请选择阀值')
+                            return null
+                        }
+                        dispatch(entranceStat({ depId, days, threshold, token }))
+                    }}>
+                        <img src="../images/icon-search.png" title="查询" /></a>
+                </li>
+                {/*onClick={()=>alert(this.dept.selectedIndex)}*/}
             </ul>
         </div>
-        {/*<Form inline>
-     <FormGroup controlId="formControlsSelect">      
-      <FormControl componentClass="select" placeholder="select">
-        <option value="select">select</option>
-        <option value="other">...</option>
-      </FormControl>
-      </FormGroup>
-      <FormGroup>
-      <FormControl componentClass="select" placeholder="select">
-        <option value="select">select</option>
-        <option value="other">...</option>
-      </FormControl>
-      </FormGroup>
-      <FormGroup>
-      <FormControl componentClass="select" placeholder="select">
-        <option value="select">select</option>
-        <option value="other">...</option>
-      </FormControl>
-    </FormGroup>
-    </Form>*/}
+       }
         <Table striped bordered condensed hover>
             <thead>
                 <tr>
@@ -166,37 +78,19 @@ let Main = ({ hidden, depts, dispatch }) =>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>周星驰</td>
-                    <td>3031754796</td>
-                    <td>电气</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>周星驰</td>
-                    <td>3031754796</td>
-                    <td>电气</td>
-                    <td>2</td>
-                </tr> <tr>
-                    <td>1</td>
-                    <td>周星驰</td>
-                    <td>3031754796</td>
-                    <td>电气</td>
-                    <td>2</td>
-                </tr> <tr>
-                    <td>1</td>
-                    <td>周星驰</td>
-                    <td>3031754796</td>
-                    <td>电气</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colSpan="3">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {
+                    stat == null ? (<tr>
+                        <td colSpan="5">未查出相应记录</td>
+                    </tr>) : stat.map((x, index) => (<tr>
+                        <td>{index + 1}</td>
+                        <td>{x.userName}</td>
+                        <td>{x.cardNo}</td>
+                        <td>{x.departmentName}</td>
+                        <td>{x.entranceCount}</td>
+                    </tr>))
+                }
+
+
             </tbody>
         </Table>
         <div className="footer">湖北城市建设职业技术学院门禁查询系统</div>
@@ -209,16 +103,19 @@ let Main = ({ hidden, depts, dispatch }) =>
 const mapStateToProps = (state) => {
     let hidden = state.showPage === 0
     let depts = state.depts
-    return { hidden, depts }
+    let stat = state.stat
+    let token = state.user == null ? null : state.user.token
+    let loading=state.loading
+    return { hidden, depts, stat, token,loading }
 }
 
-const mapDispatchToProps = {
+/*const mapDispatchToProps = {
     login: login
 }
-
+*/
 
 Main = connect(
-    mapStateToProps, mapDispatchToProps
+    mapStateToProps
 )(Main)
 
 

@@ -1,14 +1,10 @@
-//在加载中的选项，１、好友２、群组３、组织
-const loading = (state = 0, action) => {
+//页面加载
+const loading = (state = false, action) => {
     switch (action.type) {
-        case 'GET_GROUPS':
-
-        case 'GET_CORPS':
-
-        case 'GET_FRIENDS':
-            return 0
         case 'LOADING':
-            return action.id
+            return true
+        case 'LOADED':
+            return false
         default:
             return state;
     }

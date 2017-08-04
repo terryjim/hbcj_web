@@ -1,26 +1,34 @@
 //是否登录成功
-export const logined = (token) => ({
+export const logined = ({token,userName}) => ({
   type: 'LOGINED',
-  token
+  token,
+  userName
 })
 export const loginFailure = () => ({
   type: 'LOGIN_FAILURE'
 })
+//用户管辖的部门列表
 export const userDepts = (depts) => ({
   type: 'USER_DEPTS',
   depts
 })
+export const stat = (json) => (
+  {
+    type: 'STAT',
+    stat: json
+  }
+)
 export const login = ({ userName, password }) => dispatch => {
   //不能用headers=new Headers()，否则跨域出错
   /*let headers = { 'Content-Type': 'application/x-www-form-urlencoded' };*/
   let headers = { 'Content-Type': 'application/json' };
-  
+
   //headers.Authorization = WebIM.config.tokenLocal
-  let body =JSON.stringify({
+  let body = JSON.stringify({
     userName, password
   })
 
-  let args = { method: 'POST',mode: 'cors', headers:headers, body, cache: 'reload' }
+  let args = { method: 'POST', mode: 'cors', headers: headers, body, cache: 'reload' }
   console.log('登录')
   // return dispatch(logined('qwerfasdfasdfasdfasdfasfd'))
   return fetch(window.HBCJ.config.loginUrl, args).then(response => { console.log(response); return (response.json()) })
@@ -28,8 +36,8 @@ export const login = ({ userName, password }) => dispatch => {
       console.log(json)
       if (json != null && json.token != null && json.token != '') {
         console.log('登录成功')
-        dispatch(getDepts({token:json.token}))
-        return dispatch(logined(json.token))
+        dispatch(getDepts({ token: json.token }))
+        return dispatch(logined({token:json.token,userName}))
       }
       else {
         console.log('登录失败')
@@ -38,26 +46,26 @@ export const login = ({ userName, password }) => dispatch => {
       }
     })
 }
-
-export const getDepts = ({token}) => dispatch => {
+//根据用户token获取所辖部门
+export const getDepts = ({ token }) => dispatch => {
   //不能用headers=new Headers()，否则跨域出错
   /*let headers = { 'Content-Type': 'application/x-www-form-urlencoded' };*/
- 
+
   let headers = {
     'Content-Type': 'application/json;charset=utf-8',
     'Authorization': token
   };
   //headers.Authorization = WebIM.config.tokenLocal
- 
 
-  let args = { method: 'GET',mode: 'cors', headers,  cache: 'reload' }
+
+  let args = { method: 'GET', mode: 'cors', headers, cache: 'reload' }
   console.log('获取部门信息')
   // return dispatch(logined('qwerfasdfasdfasdfasdfasfd'))
   return fetch(window.HBCJ.config.getDeptsUrl, args).then(response => { console.log(response); return (response.json()) })
     .then(json => {
       console.log(json)
       if (json != null && json.token != '') {
-        console.log('获取部门信息成功')       
+        console.log('获取部门信息成功')
         return dispatch(userDepts(json))
       }
       else {
@@ -67,55 +75,43 @@ export const getDepts = ({token}) => dispatch => {
       }
     })
 }
-export const entranceStat = ({ depId,days,threshold}) => dispatch => {
+
+//统计刷卡次数
+export const entranceStat = ({ depId, days, threshold, token }) => dispatch => {
   //不能用headers=new Headers()，否则跨域出错
   /*let headers = { 'Content-Type': 'application/x-www-form-urlencoded' };*/
-  let headers = { 'Content-Type': 'application/json' };
-  debugger
+  dispatch(loading())
+  let headers = {
+    'Content-Type': 'application/json;charset=utf-8',
+    'Authorization': token
+  };
   //headers.Authorization = WebIM.config.tokenLocal
-  let body =JSON.stringify({
-    //userName, password
-  })
 
-  let args = { method: 'POST',mode: 'cors', headers:headers, body, cache: 'reload' }
+  let args = { method: 'GET', mode: 'cors', headers: headers,  cache: 'reload' }
   console.log('统计')
   // return dispatch(logined('qwerfasdfasdfasdfasdfasfd'))
-  return fetch(window.HBCJ.config.statUrl, args).then(response => { console.log(response); return (response.json()) })
+  return fetch(window.HBCJ.config.getStatUrl+'?depId='+depId+'&days='+days+'&threshold='+threshold, args).then(response => { console.log(response); return (response.json()) })
     .then(json => {
       console.log(json)
-      if (json != null && json.token != null && json.token != '') {
-        console.log('登录成功')
-        return dispatch(logined(json.token))
-      }
-      else {
-        console.log('登录失败')
-        alert('登录失败，请重新登录！')
-        return dispatch(loginFailure())
-      }
+      dispatch(loaded())
+      return dispatch(stat(json))
+
     })
 }
 
-/************************************************************
- * 左侧点击事件
-************************************************************/
 
-//选择好友显示好友基础信息
-export const showIntro = (openId) => ({
-  type: 'SHOW_INTRO',
-  openId
-})
-
-/************************************************************
- * 其它事件
-************************************************************/
-//刷新，1:好友　2:群组　3:组织
-export const loading = (id) => (
+//页面刷新中
+export const loading = () => (
   {
-    type: 'LOADING',
-    id
+    type: 'LOADING'  
   }
 )
-
+//页面刷新中
+export const loaded = () => (
+  {
+    type: 'LOADED'  
+  }
+)
 
 
 
