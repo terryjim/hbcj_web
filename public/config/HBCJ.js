@@ -8,9 +8,9 @@
 var HBCJ = {}
 window.HBCJ = HBCJ
 HBCJ.config = {
-    loginUrl: 'http://192.168.10.80:8080/hbcj/login',
-    getDeptsUrl: 'http://192.168.10.80:8080/hbcj/getDeptsByToken',
-    getStatUrl: 'http://192.168.10.80:8080/hbcj/stat',
+    loginUrl: 'http://localhost:8080/hbcj/login',
+    getDeptsUrl: 'http://localhost:8080/hbcj/getDeptsByToken',
+    getStatUrl: 'http://localhost:8080/hbcj/stat',
 }
 
 

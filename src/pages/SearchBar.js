@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { connect } from 'react-redux'
-import { login, entranceStat } from '../actions'
-import { Table, FormGroup, FormControl, Form } from 'react-bootstrap';
+import { entranceStat } from '../actions'
+import { FormControl } from 'react-bootstrap';
 
 //阀值
 const fzArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 1000]
@@ -16,17 +16,17 @@ let SearchBar = ({ depts, token, dispatch }) =>
                 <li><FormControl componentClass="select" placeholder="select" ref={selDept => this.selDept = selDept}>
                     <option value="0">部门</option>
                     {
-                        (depts != null && depts.length > 0) ? depts.map(x => (<option value={x.id}>{x.depName}</option>)) : null
+                        (depts != null && depts.length > 0) ? depts.map(x => (<option key={x.id} value={x.id}>{x.depName}</option>)) : null
                     }
 
                 </FormControl></li>
                 <li><FormControl componentClass="select" placeholder="select" ref={selDay => this.selDay = selDay}>
                     <option value="0">天数</option>
-                    {dayArray.map(x => (<option value={x}>{x}</option>))}
+                    {dayArray.map(x => (<option key={x} value={x}>{x}</option>))}
                 </FormControl></li>
                 <li><FormControl componentClass="select" placeholder="select" ref={selFz => this.selFz = selFz}>
                     <option value="0">阀值</option>
-                    {fzArray.map(x => (<option value={x}>{x}</option>))}
+                    {fzArray.map(x => (<option key={x} value={x}>{x}</option>))}
                 </FormControl></li>
                 <li>
                     <a href="javascript:void(0)" onClick={() => {
