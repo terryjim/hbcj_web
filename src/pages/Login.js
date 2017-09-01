@@ -9,11 +9,11 @@ let Login = ({ dispatch, hidden, loading }) =>
             {
                 loading ?
                     (
-                        <div className="col-md-12 text-center"><Well><img src="../images/loading.gif" />
+                        <div className="col-md-12 text-center"><Well><img src={'images/loading.gif'} />
                             <p>正在登录中，请稍后...</p></Well></div>
                     )
                     : (<div><div className="banner">
-                        <img src="./images/banner.png" />
+                        <img src={'images/banner.png'} />
                     </div>
                         <div className="login-box">
                             <form action="" method="get">

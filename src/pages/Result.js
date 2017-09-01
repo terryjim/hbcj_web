@@ -10,7 +10,7 @@ let Result = ({ stat,loading}) =>
         {
             loading ?
                 (
-                    <div className="col-md-12 text-center"><Well><img src="../images/loading.gif" />
+                    <div className="col-md-12 text-center"><Well><img src={'images/loading.gif'} />
                         <p>查询中，请稍后...</p></Well></div>
                 )
                 : (

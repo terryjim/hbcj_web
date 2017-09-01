@@ -50,7 +50,7 @@ let SearchBar = ({ depts, token, dispatch }) =>
                         }
                         dispatch(entranceStat({ depId, days, threshold, token }))
                     }}>
-                        <img src="../images/icon-search.png" title="查询" /></a>
+                        <img src={'images/icon-search.png'} title="查询" /></a>
                 </li>
                 {/*onClick={()=>alert(this.dept.selectedIndex)}*/}
             </ul>

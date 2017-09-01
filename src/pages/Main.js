@@ -10,7 +10,7 @@ let Main = ({ hidden}) =>
         display: hidden ? 'none' : ''
     }}>
     <div className="banner">
-            <img src="../images/banner.png" />
+            <img src={'images/banner.png'} />
     </div>       
      <SearchBar/><Result/>      
         <div className="footer">湖北城市建设职业技术学院门禁查询系统</div>
