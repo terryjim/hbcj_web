@@ -20,6 +20,9 @@ let Login = ({ dispatch, hidden, loading }) =>
                                 <input className="input-username" ref={userName => this.userName = userName} type="text" placeholder="请输入用户名" />
                                 <input className="input-username input-password" ref={password => this.password = password} type="password" placeholder="请输入密码" />
                                 <button className="btn-login" name="submit" type="button" onClick={() => {
+                                    alert("begin!!!")
+                                    alert(this.userName.value)
+                                    alert(this.password.value)
                                     if (this.userName.value == '') {
                                         alert('请输入用户名')
                                         return null
@@ -28,6 +31,7 @@ let Login = ({ dispatch, hidden, loading }) =>
                                         alert('请输入密码')
                                         return null
                                     }
+                                    alert("ooo")
                                     dispatch(login({ userName: this.userName.value, password: this.password.value }))
                                 }} >登 录</button>
                             </form>

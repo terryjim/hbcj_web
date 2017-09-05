@@ -2,6 +2,7 @@
   "name": "hbcj",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "crypto-js": "^3.1.9-1",
     "md5": "^2.2.1",   
