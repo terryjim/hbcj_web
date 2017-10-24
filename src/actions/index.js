@@ -21,7 +21,7 @@ export const stat = (json) => (
 export const login = ({ userName, password }) => dispatch => {
   //不能用headers=new Headers()，否则跨域出错
   /*let headers = { 'Content-Type': 'application/x-www-form-urlencoded' };*/
-  alert(1)
+  //alert(1)
   let headers = { 'Content-Type': 'application/json' };
 
   //headers.Authorization = WebIM.config.tokenLocal
@@ -31,9 +31,9 @@ export const login = ({ userName, password }) => dispatch => {
 
   let args = { method: 'POST', mode: 'cors', headers: headers, body, cache: 'reload' }
   console.log('登录')
-  alert(2)
+  //alert(2)
   dispatch(loading())
-  alert(3)
+  //alert(3)
   // return dispatch(logined('qwerfasdfasdfasdfasdfasfd'))
   return fetch(window.HBCJ.config.loginUrl, args).then(response => { 
     console.log(11)

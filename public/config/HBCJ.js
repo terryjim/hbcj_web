@@ -8,7 +8,7 @@
 var HBCJ = {}
 window.HBCJ = HBCJ
 
-var apiBaseUrl='http://192.168.3.43:8080/hbcj/'
+var apiBaseUrl='http://localhost:8080/hbcj/'
 HBCJ.config={   
     loginUrl:apiBaseUrl+'login',
     getDeptsUrl:apiBaseUrl+'getDeptsByToken',
